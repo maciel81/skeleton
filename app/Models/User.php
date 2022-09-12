@@ -41,4 +41,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Verifica se usuário está ativo
+     *
+     * @return bool
+     */
+    public function isActive(): bool
+    {
+        return $this->active === 1;
+    }
+
+    /**
+     * Verifica se usuário é administrador
+     *
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        return $this->is_admin === 1;
+    }
 }
