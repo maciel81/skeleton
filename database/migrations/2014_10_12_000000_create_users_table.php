@@ -15,15 +15,22 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->boolean('active')->default(1);
-            $table->boolean('is_admin')->default(0);
             $table->string('name');
             $table->string('username')->unique();
-//            $table->string('email')->nullable();
-//            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->rememberToken();
+
+            $table->boolean('active')->default(1);
+            $table->boolean('is_admin')->default(0);
+
+            $table->unsignedBigInteger('created_id')->nullable();
+            $table->unsignedBigInteger('updated_id')->nullable();
+            $table->unsignedBigInteger('deleted_id')->nullable();
+
             $table->timestamps();
+            $table->softDeletes($column = 'deleted_at', $precision = 0);
+            $table->foreign('created_id')->references('id')->on('users');
+            $table->foreign('updated_id')->references('id')->on('users');
+            $table->foreign('deleted_id')->references('id')->on('users');
         });
     }
 
