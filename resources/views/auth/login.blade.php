@@ -33,7 +33,7 @@
                             <label for="password">Senha</label>
                         </div>
                         <div class="d-grid gap-2">
-                            <button class="btn btn-primary btn-lg btn-login" type="submit">Entrar</button>
+                            <button class="btn btn-primary btn-lg btn-login" type="submit">Entrar no sistema</button>
                         </div>
                     </form>
                 </div>

@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-gradient-blue p-0 sticky-top mb-5">
         <div class="container-fluid">
             <a class="navbar-brand"
-               href="#">
+               href="{{ route('home') }}">
                 <img src="//www.cdn.der.rj.gov.br/Imagens/logo-negativo-der.png"
                      style="height: 100%; width: 60px;"
                      alt="DER-RJ"
@@ -40,15 +40,15 @@
                            aria-expanded="false">Administração</a>
                         <ul class="dropdown-menu dropdown-menu-end"
                             aria-labelledby="navbarAdmin">
-                            @isAdmin
+                            @hasanyrole('admin|super-admin')
                             <li>
                                 <a class="dropdown-item"
-                                   href="#">Usuários</a>
+                                   href="{{ route('users.index') }}">Usuários</a>
                             </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            @endisAdmin
+{{--                            <li>--}}
+{{--                                <hr class="dropdown-divider">--}}
+{{--                            </li>--}}
+                            @endhasanyrole
 
                         </ul>
                     </li>
@@ -73,19 +73,18 @@
                             </li>
                             <li>
                                 <a class="dropdown-item"
-                                   href="{{ route('password.reset', auth()->user()->remember_token) }}">
+                                   href="{{ route('users.change-password-form') }}">
                                     Trocar Senha
                                 </a>
                             </li>
                             <li>
-                                <form method="POST"
-                                      action="{{ route('logout') }}">
+                                <a class="dropdown-item"
+                                   href="#"
+                                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf
-                                    <a class="dropdown-item"
-                                       href="#"
-                                       onclick="event.preventDefault(); this.closest('form').submit();">
-                                        Sair
-                                    </a>
                                 </form>
                             </li>
                         </ul>

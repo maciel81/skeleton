@@ -10,6 +10,10 @@
 // Select2
 @import "@selectize/selectize/dist/css/selectize.bootstrap5";
 
+body {
+  font-family: $font-family-sans-condensed;
+}
+
 .headline {
   font-family: $font-family-sans-condensed;
   font-weight: bold;
@@ -29,6 +33,7 @@
     font-weight: bold;
   }
 }
+
 #header {
   .bg-gradient-blue {
     /* fallback for old browsers */
@@ -59,9 +64,14 @@
     }
 
     .dropdown-menu {
+      margin-top: 1rem;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+
       .dropdown-item {
-        font-size: 1.25rem;
+        font-size: 1rem;
       }
+
     }
   }
 

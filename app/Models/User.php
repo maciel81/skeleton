@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -52,15 +53,5 @@ class User extends Authenticatable
     public function isActive(): bool
     {
         return $this->active === 1;
-    }
-
-    /**
-     * Verifica se usuário é administrador
-     *
-     * @return bool
-     */
-    public function isAdmin(): bool
-    {
-        return $this->is_admin === 1;
     }
 }

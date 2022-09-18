@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\View\Components\Headline;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
@@ -24,12 +26,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Blade::directive('isAdmin', function() {
-            return "<?php if(Auth::user()->isAdmin()): ?>";
-        });
-
-        Blade::directive('endisAdmin', function() {
-            return "<?php endif; ?>";
-        });
+        Paginator::useBootstrapFive();
+        Blade::component('package-headline', Headline::class);
     }
 }
