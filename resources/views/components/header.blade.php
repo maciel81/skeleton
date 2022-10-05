@@ -31,6 +31,7 @@
                         <a class="nav-link"
                            href="{{ route('home') }}">Home</a>
                     </li>
+                    @hasanyrole('admin|super-admin')
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle"
                            href="#"
@@ -40,7 +41,7 @@
                            aria-expanded="false">Administração</a>
                         <ul class="dropdown-menu dropdown-menu-end"
                             aria-labelledby="navbarAdmin">
-                            @hasanyrole('admin|super-admin')
+
                             <li>
                                 <a class="dropdown-item"
                                    href="{{ route('users.index') }}">Usuários</a>
@@ -48,10 +49,9 @@
 {{--                            <li>--}}
 {{--                                <hr class="dropdown-divider">--}}
 {{--                            </li>--}}
-                            @endhasanyrole
-
                         </ul>
                     </li>
+                    @endhasanyrole
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle"
                            href="#"
