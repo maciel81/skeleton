@@ -6,10 +6,10 @@
             <table class="table table">
                 <thead>
                 <tr>
-                    <th width="250px" class="fs-4">Login</th>
-                    <th width="400px" class="fs-4">Nome</th>
-                    <th width="120px" class="fs-4">Perfil</th>
-                    <th></th>
+                    <th width="200px" class="fs-4">Login</th>
+                    <th width="300px" class="fs-4">Nome</th>
+                    <th class="fs-4">Perfil</th>
+                    <th width="270px"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -17,13 +17,13 @@
                     <tr>
                         <td class="align-middle fs-5">{{ $user->username }}</td>
                         <td class="align-middle fs-5">{{ $user->name }}</td>
-                        <td class="align-middle fs-5">{{ Str::ucfirst($user->getRoleNames()->first()) }}</td>
+                        <td class="align-middle fs-5">{!! Str::lower($user->getRoleNames()->implode(' | ')) !!}</td>
                         <td class="align-middle text-end">
                             <div class="btn-group" role="group">
                                 <a class="btn btn-sm btn-outline-warning text-dark px-3" href="{{ route('users.edit', $user) }}"
                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Editar Usuário"><i
                                             class="bi bi-pencil-fill"></i>
-                                    <span class="ps-1">Editar Dados</span>
+                                    <span class="ps-1">Editar</span>
                                 </a>
                                 <a class="btn btn-sm btn-outline-danger text-dark px-3" href="#"
                                    onclick="event.preventDefault(); document.getElementById('changePassword{{ $user->id }}').submit();"

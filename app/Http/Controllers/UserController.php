@@ -25,7 +25,7 @@ class UserController extends Controller
      */
     public function index(): View
     {
-        $users = User::whereNot('username', 'SysAdmin')->with(['roles'])->paginate(10);
+        $users = User::whereNot('username', 'SysAdmin')->with(['roles'])->paginate(20);
 
         return view('users.index', compact(['users']));
     }
@@ -54,7 +54,7 @@ class UserController extends Controller
         $user = User::create([
             'name' => $request->input('name'),
             'username' => $request->input('username'),
-            'password' => Hash::make(config('der@123')),
+            'password' => Hash::make('der@123'),
         ]);
         $user->assignRole($request->input('role'));
         DB::commit();
@@ -68,14 +68,14 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
+     * @param User $user
      * @return View|RedirectResponse
      */
-    public function edit($id): View|RedirectResponse
+    public function edit(User $user): View|RedirectResponse
     {
         $roles = Role::whereNot('name', 'super-admin')->get();
-        $user = User::where('id', $id)->whereNot('username', 'SysAdmin')->first();
-        if (!$user) {
+
+        if ($user->id === 1) {
             return redirect()->route('users.index')->with([
                 'alert' => 'error',
                 'message' => 'Usuário não encontrado'
@@ -89,13 +89,12 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param UserRequest $request
-     * @param int $id
+     * @param User $user
      * @return RedirectResponse
      */
-    public function update(UserRequest $request, $id): RedirectResponse
+    public function update(UserRequest $request, User $user): RedirectResponse
     {
-        $user = User::where('id', $id)->whereNot('username', 'SysAdmin')->first();
-        if (!$user) {
+        if ($user->id === 1) {
             return redirect()->route('users.index')->with([
                 'alert' => 'error',
                 'message' => 'Usuário não encontrado'
@@ -103,11 +102,11 @@ class UserController extends Controller
         }
 
         DB::beginTransaction();
-        $user->name = $request->input('name');
-        $user->username = $request->input('username');
-        $user->updated_id = Auth::user()->id;
-        $user->save();
-        $user->syncRoles([$request->input('role')]);
+            $user->name = $request->input('name');
+            $user->username = $request->input('username');
+            $user->updated_id = Auth::user()->id;
+            $user->save();
+            $user->syncRoles([$request->input('role')]);
         DB::commit();
 
         return redirect()->route('users.index')->with(['alert' => 'success', 'message' => 'Dados do usuário alterados com sucesso!']);
@@ -116,13 +115,13 @@ class UserController extends Controller
     /**
      * Habilita/Desabilita o usuário.
      *
-     * @param int $id
+     * @param User $user
      * @return RedirectResponse
      */
-    public function active($id): RedirectResponse
+    public function active(User $user): RedirectResponse
     {
-        $user = User::where('id', $id)->whereNot('username', 'SysAdmin')->first();
-        if (!$user) {
+
+        if ($user->id === 1) {
             return redirect()->route('users.index')->with([
                 'alert' => 'error',
                 'message' => 'Usuário não encontrado'
@@ -133,6 +132,8 @@ class UserController extends Controller
             $user->updated_id = Auth::user()->id;
             $user->active = 0;
             $user->save();
+
+
 
             return redirect()->route('users.index')->with([
                 'alert' => 'success',

@@ -2,15 +2,11 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-gradient-blue p-0 sticky-top mb-5">
         <div class="container-fluid">
             <a class="navbar-brand"
-               href="{{ route('home') }}">
+                href="{{ route('home') }}">
                 <img src="//www.cdn.der.rj.gov.br/Imagens/logo-negativo-der.png"
-                     style="height: 100%; width: 60px;"
-                     alt="DER-RJ"
-                     class="mt-1">
-                <img src="//www.cdn.der.rj.gov.br/Imagens/logo-negativo-secretaria.png"
-                     style="height: 100%; width: 250px"
-                     alt="SECID"
-                     class="mb-1">
+                    style="height: 100%; width: 60px;"
+                    alt="DER-RJ"
+                    class="my-0">
             </a>
             <div class="w-100 text-center my-3">
                 <span class="navbar-brand">{{ config('app.name') }}</span>
@@ -26,22 +22,21 @@
             </button>
             <div class="collapse navbar-collapse my-3"
                  id="navbarContent">
-                <ul class="navbar-nav w-100 justify-content-end">
+                <ul class="navbar-nav w-100 justify-content-end fs-5">
                     <li class="nav-item">
                         <a class="nav-link"
                            href="{{ route('home') }}">Home</a>
                     </li>
                     @hasanyrole('admin|super-admin')
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle"
+                        <a class="nav-link dropdown-toggle text-light"
                            href="#"
                            id="navbarAdmin"
                            role="button"
                            data-bs-toggle="dropdown"
                            aria-expanded="false">Administração</a>
-                        <ul class="dropdown-menu dropdown-menu-end"
+                        <ul class="dropdown-menu dropdown-menu-end fs-5"
                             aria-labelledby="navbarAdmin">
-
                             <li>
                                 <a class="dropdown-item"
                                    href="{{ route('users.index') }}">Usuários</a>
@@ -61,7 +56,7 @@
                             <i class="fas fa-sm fa-user"></i>
                             {{ auth()->user()->username }}
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-end"
+                        <ul class="dropdown-menu dropdown-menu-end fs-5"
                             aria-labelledby="navbarPerfil">
                             <li>
                                 <a class="dropdown-item disabled">

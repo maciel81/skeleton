@@ -1,5 +1,5 @@
 // Fonts
-@import url('https://fonts.bunny.net/css?family=Roboto:300,400|Roboto-Condensed:400');
+@import url('https://fonts.bunny.net/css?family=Akshar|Asap-Condensed');
 
 // Variables
 @import 'variables';
@@ -23,6 +23,16 @@ body {
   }
 }
 
+input[type="text"],
+input[type="password"],
+input[type="select"]
+{
+  background-color: #ffffff;
+  &:focus {
+    background-color: #ffffff;
+  }
+}
+
 #login {
   font-family: $font-family-sans-serif;
   min-height: 85vh !important;
@@ -35,6 +45,8 @@ body {
 }
 
 #header {
+  font-family: $font-family-sans-condensed;
+
   .bg-gradient-blue {
     /* fallback for old browsers */
     background: $blue-700;
@@ -57,21 +69,10 @@ body {
   }
 
   .nav-item {
-    font-family: $font-family-sans-condensed;
-
-    .nav-link {
-      font-size: 1.25rem;
-    }
-
     .dropdown-menu {
       margin-top: 1rem;
       border-top-left-radius: 0;
       border-top-right-radius: 0;
-
-      .dropdown-item {
-        font-size: 1rem;
-      }
-
     }
   }
 
@@ -98,6 +99,6 @@ body {
 
 #users {
   table {
-    font-family: $font-family-sans-condensed;
+    font-family: $font-family-sans-serif;
   }
 }

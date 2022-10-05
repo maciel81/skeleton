@@ -1,12 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+
     <section id="users">
         <x-headline icon="bi-person-lines-fill" title="Alterar dados de {{ $user->username }}"/>
         <form method="POST" action="{{ route('users.update', $user->id) }}">
             @csrf
             @method('PUT')
-            <div class="row mb-3 align-items-center">
+            <div class="row flex align-items-end">
                 <div class="col-12 col-xl-2 mb-3">
                     <label for="username"
                            class="form-label">Login</label>
@@ -17,7 +18,7 @@
                            value="{{ $user->username }}"
                            required>
                 </div>
-                <div class="col-12 col-xl-3 mb-3">
+                <div class="col-12 col-xl-2 mb-3">
                     <label for="nome"
                            class="form-label">Nome</label>
                     <input type="text"
@@ -27,16 +28,17 @@
                            value="{{ $user->name }}"
                            required>
                 </div>
-                <div class="col-12 col-xl-2 mb-3">
+                <div class="col-12 col-xl-6 mb-3">
                     <label for="role"
                            class="form-label">Perfil</label>
-                    <select name="role"
+                    <select name="role[]"
                             id="role"
-                            class="form-select"
+                            class="selectize"
+                            multiple
                             required>
                         @foreach($roles as $role)
                             <option value="{{ $role->name }}"
-                                    @if ($user->getRoleNames()->first() === $role->name) selected @endif>{{ Str::ucfirst($role->name) }}
+                                    @if (Str::contains($user->getRoleNames()->implode('|'), $role->name)) selected @endif>{{ Str::ucfirst($role->name) }}
                             </option>
                         @endforeach
                     </select>
