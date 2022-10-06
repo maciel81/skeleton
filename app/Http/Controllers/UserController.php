@@ -27,7 +27,7 @@ class UserController extends Controller
     {
         $users = User::whereNot('username', 'SysAdmin')->with(['roles'])->paginate(20);
 
-        return view('users.index', compact(['users']));
+        return view('admin.users.index', compact(['users']));
     }
 
     /**
@@ -39,7 +39,7 @@ class UserController extends Controller
     {
         $roles = Role::whereNot('name', 'super-admin')->get();
 
-        return view('users.create', compact(['roles']));
+        return view('admin.users.create', compact(['roles']));
     }
 
     /**
@@ -59,7 +59,7 @@ class UserController extends Controller
         $user->assignRole($request->input('role'));
         DB::commit();
 
-        return redirect()->route('users.index')->with([
+        return redirect()->route('admin.users.index')->with([
             'alert' => 'success',
             'message' => 'Usuário ' . $request->input('username') . ' criado com sucesso'
         ]);
@@ -76,13 +76,13 @@ class UserController extends Controller
         $roles = Role::whereNot('name', 'super-admin')->get();
 
         if ($user->id === 1) {
-            return redirect()->route('users.index')->with([
+            return redirect()->route('admin.users.index')->with([
                 'alert' => 'error',
                 'message' => 'Usuário não encontrado'
             ]);
         }
 
-        return view('users.edit', compact(['user', 'roles']));
+        return view('admin.users.edit', compact(['user', 'roles']));
     }
 
     /**
@@ -95,7 +95,7 @@ class UserController extends Controller
     public function update(UserRequest $request, User $user): RedirectResponse
     {
         if ($user->id === 1) {
-            return redirect()->route('users.index')->with([
+            return redirect()->route('admin.users.index')->with([
                 'alert' => 'error',
                 'message' => 'Usuário não encontrado'
             ]);
@@ -109,7 +109,7 @@ class UserController extends Controller
             $user->syncRoles([$request->input('role')]);
         DB::commit();
 
-        return redirect()->route('users.index')->with(['alert' => 'success', 'message' => 'Dados do usuário alterados com sucesso!']);
+        return redirect()->route('admin.users.index')->with(['alert' => 'success', 'message' => 'Dados do usuário alterados com sucesso!']);
     }
 
     /**
@@ -122,7 +122,7 @@ class UserController extends Controller
     {
 
         if ($user->id === 1) {
-            return redirect()->route('users.index')->with([
+            return redirect()->route('admin.users.index')->with([
                 'alert' => 'error',
                 'message' => 'Usuário não encontrado'
             ]);
@@ -135,7 +135,7 @@ class UserController extends Controller
 
 
 
-            return redirect()->route('users.index')->with([
+            return redirect()->route('admin.users.index')->with([
                 'alert' => 'success',
                 'message' => 'Usuário desabilitado com sucesso',
             ]);
@@ -145,7 +145,7 @@ class UserController extends Controller
         $user->active = 1;
         $user->save();
 
-        return redirect()->route('users.index')->with([
+        return redirect()->route('admin.users.index')->with([
             'alert' => 'success',
             'message' => 'Usuário habilitado com sucesso',
         ]);
@@ -158,7 +158,7 @@ class UserController extends Controller
      */
     public function changePasswordForm(): View
     {
-        return view(view: 'users.change-password');
+        return view(view: 'auth.change-password');
     }
 
     /**
@@ -171,7 +171,7 @@ class UserController extends Controller
     {
         $user = User::where('id', $id)->whereNot('username', 'SysAdmin')->first();
         if (!$user) {
-            return redirect()->route('users.index')->with([
+            return redirect()->route('admin.users.index')->with([
                 'alert' => 'error',
                 'message' => 'Usuário não encontrado'
             ]);
@@ -180,7 +180,7 @@ class UserController extends Controller
         $user->password = Hash::make('der@123');
         $user->save();
 
-        return redirect()->route('users.index')->with([
+        return redirect()->route('admin.users.index')->with([
             'alert' => 'success',
             'message' => 'Senha do usuário ' . $user->username . ' resetada com sucesso!'
         ]);
@@ -198,7 +198,7 @@ class UserController extends Controller
         $user->password = Hash::make($request->input('password'));
         $user->save();
 
-        return redirect()->route('users.change-password-form')
+        return redirect()->route('user.change-password-form')
             ->with([
                 'alert' => 'success',
                 'message' => 'A senha foi alterada com sucesso'

@@ -11,6 +11,14 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    @guest()
+    <style>
+        body {
+            background-image: url('https://cdn.der.rj.gov.br/Imagens/background-estrada.jpg');
+        }
+    </style>
+    @endguest
+
 
 </head>
 <body>

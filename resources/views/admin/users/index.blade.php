@@ -2,7 +2,7 @@
 
 @section('content')
     <section id="users">
-        <x-headline icon="bi-people-fill" title="Lista de Usuários" btn-text="Novo Usuário" btn-route="users.create"/>
+        <x-headline icon="bi-people-fill" title="Lista de Usuários" btn-text="Novo Usuário" btn-route="admin.users.create"/>
             <table class="table table">
                 <thead>
                 <tr>
@@ -20,7 +20,7 @@
                         <td class="align-middle fs-5">{!! Str::lower($user->getRoleNames()->implode(' | ')) !!}</td>
                         <td class="align-middle text-end">
                             <div class="btn-group" role="group">
-                                <a class="btn btn-sm btn-outline-warning text-dark px-3" href="{{ route('users.edit', $user) }}"
+                                <a class="btn btn-sm btn-outline-warning text-dark px-3" href="{{ route('admin.users.edit', $user) }}"
                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Editar Usuário"><i
                                             class="bi bi-pencil-fill"></i>
                                     <span class="ps-1">Editar</span>
@@ -31,16 +31,16 @@
                                     <i class="bi bi-exclamation-diamond"></i>
                                     <span class="ps-1">Resetar Senha</span>
                                 </a>
-                                <form id="changePassword{{ $user->id }}" action="{{ route('users.change-user-password', $user->id) }}" method="POST" style="display: none;">
+                                <form id="changePassword{{ $user->id }}" action="{{ route('admin.users.change-user-password', $user->id) }}" method="POST" style="display: none;">
                                     @csrf
                                     @method('PUT')
                                 </form>
                                 @if ($user->isActive())
-                                    <a class="btn btn-sm btn-outline-success px-3" href="{{ route('users.active', $user->id) }}"
+                                    <a class="btn btn-sm btn-outline-success px-3" href="{{ route('admin.users.active', $user->id) }}"
                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Desabilitar Usuário"><i
                                                 class="bi bi-toggle-on"></i></a>
                                 @else
-                                    <a class="btn btn-sm btn-outline-secondary px-3" href="{{ route('users.active', $user->id) }}"
+                                    <a class="btn btn-sm btn-outline-secondary px-3" href="{{ route('admin.users.active', $user->id) }}"
                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Habilitar Usuário"><i
                                                 class="fbi bi-toggle-off"></i></a>
                                 @endif

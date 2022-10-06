@@ -22,18 +22,24 @@ Route::middleware(['auth', 'user.active'])->group(function () {
         return view('layouts.app');
     })->name('home');
 
-    Route::prefix('users')->group(function () {
-        Route::controller(UserController::class)->group(function () {
-            Route::get('/password', 'changePasswordForm')->name('users.change-password-form');
-            Route::put('/password', 'changeOwnPassword')->name('users.change-own-password');
-            Route::middleware('role:super-admin|admin')->group(function () {
-                Route::get('/', 'index')->name('users.index');
-                Route::get('/create', 'create')->name('users.create');
-                Route::post('/', 'store')->name('users.store');
-                Route::get('/{user}/edit', 'edit')->name('users.edit');
-                Route::put('/{user}', 'update')->name('users.update');
-                Route::put('/password/{user}', 'changeUserPassword')->name('users.change-user-password');
-                Route::get('/{user}/active', [UserController::class, 'active'])->name('users.active');
+
+    Route::prefix('/user')->group(function () {
+        Route::get('/password', [UserController::class, 'changePasswordForm'])->name('user.change-password-form');
+        Route::put('/password', [UserController::class, 'changeOwnPassword'])->name('user.change-own-password');
+    });
+
+    Route::prefix('/admin')->group(function () {
+        Route::prefix('/users')->group(function () {
+            Route::controller(UserController::class)->group(function () {
+                Route::middleware('role:super-admin|admin')->group(function () {
+                    Route::get('/', 'index')->name('admin.users.index');
+                    Route::get('/create', 'create')->name('admin.users.create');
+                    Route::post('/', 'store')->name('admin.users.store');
+                    Route::get('/{user}/edit', 'edit')->name('admin.users.edit');
+                    Route::put('/{user}', 'update')->name('admin.users.update');
+                    Route::put('/password/{user}', 'changeUserPassword')->name('admin.users.change-user-password');
+                    Route::get('/{user}/active', [UserController::class, 'active'])->name('admin.users.active');
+                });
             });
         });
     });
