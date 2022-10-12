@@ -17,7 +17,7 @@
                                required
                                autocomplete="current-password">
                         <span class="input-group-text bg-white">
-                            <i class="bi bi-eye-slash-fill fs-5" id="togglePassword"></i>
+                            <i class="bx bxs-lock-alt fs-5" id="togglePassword"></i>
                         </span>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                                name="password_confirmation"
                                required>
                         <span class="input-group-text bg-white">
-                            <i class="bi bi-eye-slash-fill fs-5" id="togglePasswordConfirmation"></i>
+                            <i class="bx bxs-lock-alt fs-5" id="togglePasswordConfirmation"></i>
                         </span>
                     </div>
                 </div>

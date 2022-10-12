@@ -11,29 +11,32 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
     @guest()
-    <style>
-        body {
-            background-image: url('https://cdn.der.rj.gov.br/Imagens/background-estrada.jpg');
-        }
-    </style>
+        <style>
+            body {
+                background-image: url('//cdn.der.rj.gov.br/Imagens/background-estrada.jpg');
+                min-height: 85vh !important;
+            }
+      </style>
     @endguest
 
 
 </head>
-<body>
-<box
+<body @if(Cookie::get('theme') === 'dark') class="dark" @endif>
 @auth
     <x-header/>
+    <x-sidebar/>
 @endauth
+<section class="content">
+    <div class="container-fluid">
+    Dashboard
+    @auth
+        <x-alert/>
+    @endauth
 
-<section id="content">
-    <div class="container">
-        @auth
-            <x-alert/>
-        @endauth
-
-        @yield('content')
+    @yield('content')
     </div>
 </section>
 </body>
