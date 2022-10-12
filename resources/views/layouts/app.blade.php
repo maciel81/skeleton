@@ -22,7 +22,7 @@
 
 </head>
 <body>
-
+<box
 @auth
     <x-header/>
 @endauth
