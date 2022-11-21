@@ -18,6 +18,8 @@
             body {
                 background-image: url('https://cdn.der.rj.gov.br/Imagens/background-estrada.jpg');
             }
+
+            .card
         </style>
     @endguest
 
@@ -26,7 +28,7 @@
 <body>
 <div class="container d-flex flex-row justify-content-center align-items-center h-100">
     <div class="col-10 col-md-8 col-lg-4 p-2">
-        <div class="shadow-lg bg-body p-4 rounded-4">
+        <div class="shadow-lg bg-body bg-opacity-50 p-4 rounded-4">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <img src="//www.cdn.der.rj.gov.br/Imagens/logo-color-der.png" class="mt-1"
                      style="height: 50px;" alt="logo-der">
@@ -62,7 +64,9 @@
                             </span>
                     </div>
                     <div class="col text-end">
-                        <button class="btn btn-primary btn-lg btn-login" type="submit">Fazer login</button>
+                        <div class="d-grid">
+                            <button class="btn btn-primary btn-lg btn-login btn-extended" type="submit">Entrar no sistema</button>
+                        </div>
                     </div>
                 </form>
             </div>
